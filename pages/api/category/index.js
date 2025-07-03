@@ -27,7 +27,7 @@ handler.get(async (req, res) => {
     const categories = await Category.find()
       .sort({ createdAt: -1 })
       .skip(skip)
-      .limit(PAGE_SIZE)
+      .limit(req.query.pageSize || PAGE_SIZE)
 
     await db.disconnect()
     res.json({ page, categories, totalPages })
